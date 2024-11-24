@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free CP Generator - Modern & Stylish</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: #2c2c2c; /* پس‌زمینه مشکی مایل به طوسی */
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+        }
+        .container {
+            background-color: rgba(31, 31, 31, 0.8); /* پس‌زمینه نیمه شفاف */
+            border-radius: 10px;
+            padding: 30px;
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            margin-bottom: 20px;
+        }
+        h1 {
+            color: #00e676;
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+        .btn-group {
+            margin-bottom: 15px;
+            text-align: center;
+            display: flex; /* استفاده از Flexbox برای کنار هم قرار دادن دکمه‌ها */
+            justify-content: center; /* تراز کردن دکمه‌ها در مرکز */
+        }
+        .btn-group div {
+            margin: 0 10px; /* فاصله بین دکمه‌ها */
+        }
+        button {
+            border: none;
+            padding: 8px 16px; /* اندازه دکمه‌ها کوچک‌تر شد */
+            font-size: 0.9rem; /* اندازه فونت دکمه‌ها کوچک‌تر شد */
+            border-radius: 5px;
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        button.selected {
+            background-color: #ff1744; /* رنگ دکمه وقتی کلیک شده */
+        }
+        button:hover {
+            opacity: 0.8; /* تغییر شفافیت در حالت hover */
+        }
+        /* استایل دکمه‌های رایگان */
+        .free-button {
+            background-color: #00e676;
+        }
+        /* استایل دکمه‌های خرید */
+        .buy-button-6000 {
+            background-color: #ff9800; /* رنگ دکمه 6000 CP */
+        }
+        .buy-button-10000 {
+            background-color: #2979ff; /* رنگ دکمه 10000 CP */
+        }
+        .buy-button-15000 {
+            background-color: #d50000; /* رنگ دکمه 15000 CP */
+        }
+        /* دکمه پرایوت پلیس */
+        .privacy-button {
+            background-color: #ff9800; /* رنگ متفاوت */
+            margin-top: 20px;
+        }
+        /* متن حریم خصوصی */
+        .privacy-message {
+            display: none;
+            margin-top: 20px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border: 1px solid #ff9800;
+            padding: 15px;
+            border-radius: 5px;
+            text-align: left;
+            font-size: 1rem; /* اندازه فونت اصلی */
+            line-height: 1.5;
+            color: #00f; /* رنگ آبی */
+            font-weight: bold; /* درشت */
+            font-family: 'Courier New', Courier, monospace; /* فونت خاص */
+        }
+        /* استایل حقوق */
+        .footer {
+            color: #fff; /* رنگ سفید */
+            font-size: 0.9rem;
+            text-align: center;
+            margin-top: 20px;
+        }
+        /* استایل تاریخ */
+        .date {
+            font-size: 1rem;
+            color: #fff; /* رنگ سفید */
+            margin-bottom: 15px;
+            font-weight: bold; /* فونت کلفت */
+        }
+        /* استایل کادر خرید سی پی */
+        .buy-container {
+            margin-top: 30px;
+            padding: 20px;
+            border: 1px solid #ff9800;
+            border-radius: 10px;
+            background-color: #e0e0e0; /* رنگ بین سفید و طوسی */
+            text-align: center; /* تراز کردن محتوا در وسط */
+        }
+    </style>
+</head>
+<body>
+
+<!-- تاریخ میلادی -->
+<div class="date" id="currentDate"></div>
+
+<div class="description">
+    Welcome to our free CP generator! Using this panel, you can easily claim free CP for your Call of Duty account. Simply click on the desired amount and let the system generate CP for you. No need for complicated processes, just choose, click, and enjoy!
+</div>
+
+<div class="container">
+    <h1>Free CP Generator</h1>
+    <div class="btn-group">
+        <div>
+            <button class="free-button" onclick="generateCP(250)">Get 250 CP</button>
+        </div>
+        <div>
+            <button class="free-button" onclick="generateCP(450)">Get 450 CP</button>
+        </div>
+    </div>
+    <div id="message" class="message"></div>
+
+    <!-- لینک‌های دانلود -->
+    <div class="download-links">
+        <p>Download Call of Duty:</p>
+        <a href="https://play.google.com/store/apps/details?id=com.activision.callofduty.shooter" target="_blank">Google Play</a>
+        <a href="https://apps.apple.com/us/app/call-of-duty-mobile/id1287282218" target="_blank">App Store</a>
+    </div>
+
+    <!-- دکمه پرایوت پلیس -->
+    <button class="privacy-button" onclick="togglePrivacyMessage()">Privacy Policy</button>
+
+    <!-- متن حریم خصوصی -->
+    <div id="privacyMessage" class="privacy-message">
+        We value your privacy and are committed to protecting your personal information. Your data will never be shared with third parties without your consent. For more information, please review our privacy policy.
+    </div>
+
+    <!-- کادر خرید سی پی -->
+    <div class="buy-container">
+        <h2>Purchase CP</h2>
+        <div class="btn-group">
+            <div>
+                <button class="buy-button-6000" onclick="redirectToLoading()">6000 CP - Only $500</button>
+            </div>
+            <div>
+                <button class="buy-button-10000" onclick="redirectToLoading()">10000 CP - Only $648</button>
+            </div>
+        </div>
+        <div>
+            <button class="buy-button-15000" onclick="redirectToLoading()">15000 CP - Only $750</button>
+        </div>
+    </div>
+</div>
+
+<!-- متن حقوق -->
+<div class="footer">
+    © 2024 All rights reserved for CP Call of Duty site.
+</div>
+
+<script>
+    function generateCP(amount) {
+        const messageBox = document.getElementById('message');
+        messageBox.textContent = `${amount} CP is being generated...`;
+        messageBox.className = 'message success';
+        messageBox.style.display = 'block';
+
+        // انتقال به صفحه لودینگ
+        setTimeout(() => {
+            window.location.href = 'loading.html';
+        }, 2000); // بعد از 2 ثانیه به صفحه لودینگ منتقل می‌شود
+    }
+
+    function redirectToLoading() {
+        // انتقال به صفحه لودینگ
+        setTimeout(() => {
+            window.location.href = 'loading.html';
+        }, 2000); // بعد از 2 ثانیه به صفحه لودینگ منتقل می‌شود
+    }
+
+    function togglePrivacyMessage() {
+        const privacyMessage = document.getElementById('privacyMessage');
+        if (privacyMessage.style.display === 'none' || privacyMessage.style.display === '') {
+            privacyMessage.style.display = 'block';
+        } else {
+            privacyMessage.style.display = 'none';
+        }
+    }
+
+    // نمایش تاریخ فعلی
+    const dateElement = document.getElementById('currentDate');
+    const currentDate = new Date().toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+    });
+    dateElement.textContent = currentDate;
+</script>
+
+</body>
+</html>
